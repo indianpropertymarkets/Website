@@ -11,7 +11,7 @@ export function renderHome(container) {
         
         <!-- LEFT IMAGE -->
         <div class="hero-image anim-fade-up">
-          <img src="./assets/hero-property.png" alt="Property Illustration">
+          <img src="/assets/hero-property.png" alt="Property Illustration">
         </div>
 
         <!-- RIGHT CONTENT -->

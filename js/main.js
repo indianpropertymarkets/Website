@@ -3,13 +3,16 @@
 // ============================================
 import "../style.css";
 
+console.log("main.js loaded");
+
+
 // Page modules (lazy-ish imports)
-import "./pages/home.js";
-import "./pages/buyer.js";
-import "./pages/seller.js";
-import "./pages/services.js";
-import "./pages/admin.js";
-import "./pages/contact.js";
+import { renderHome } from "./pages/home.js";
+import { renderBuyer } from "./pages/buyer.js";
+import { renderSeller } from "./pages/seller.js";
+import { renderServices } from "./pages/services.js";
+import { renderAdmin } from "./pages/admin.js";
+import { renderContact } from "./pages/contact.js";
 
 const app = document.getElementById('app');
 const navToggle = document.getElementById('navToggle');
