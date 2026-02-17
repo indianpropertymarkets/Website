@@ -4,12 +4,12 @@
 import "../style.css";
 
 // Page modules (lazy-ish imports)
-import { renderHome } from './js/pages/home.js';
-import { renderBuyer } from './js/pages/buyer.js';
-import { renderSeller } from './js/pages/seller.js';
-import { renderServices } from './js/pages/services.js';
-import { renderAdmin } from './js/pages/admin.js';
-import { renderContact } from './js/pages/contact.js';
+import "./pages/home.js";
+import "./pages/buyer.js";
+import "./pages/seller.js";
+import "./pages/services.js";
+import "./pages/admin.js";
+import "./pages/contact.js";
 
 const app = document.getElementById('app');
 const navToggle = document.getElementById('navToggle');
