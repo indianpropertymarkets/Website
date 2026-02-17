@@ -1,7 +1,7 @@
 // ============================================
 //  Main Application Entry – SPA Router
 // ============================================
-import './style.css';
+import "../style.css";
 
 // Page modules (lazy-ish imports)
 import { renderHome } from './js/pages/home.js';
