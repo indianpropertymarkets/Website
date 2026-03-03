@@ -3,7 +3,7 @@
 // ============================================
 
 // Admin phone number (with country code, no + sign)
-const ADMIN_PHONE = '919876543210'; // ← Update with your admin number
+const ADMIN_PHONE = '919080744687'; // ← Update with your admin number
 
 /**
  * Opens WhatsApp with a pre-filled message to the admin

@@ -9,9 +9,18 @@ export function renderHome(container) {
     <div class="container">
       <div class="hero-wrapper">
         
-        <!-- LEFT IMAGE -->
+        <!-- LEFT SLIDESHOW -->
         <div class="hero-image anim-fade-up">
-          <img src="/assets/hero-property.png" alt="Property Illustration">
+          <div class="hero-slideshow" id="heroSlideshow">
+            <img src="/assets/hero-slide-1.png" alt="Luxury Villa" class="hero-slide active">
+            <img src="/assets/hero-slide-2.png" alt="Modern Apartments" class="hero-slide">
+            <img src="/assets/hero-slide-3.png" alt="Commercial Space" class="hero-slide">
+            <div class="hero-dots">
+              <span class="hero-dot active" data-slide="0"></span>
+              <span class="hero-dot" data-slide="1"></span>
+              <span class="hero-dot" data-slide="2"></span>
+            </div>
+          </div>
         </div>
 
         <!-- RIGHT CONTENT -->
@@ -172,4 +181,63 @@ export function renderHome(container) {
       </div>
     </section>
   `;
+
+  // --- Hero Slideshow Logic ---
+  initHeroSlideshow();
+}
+
+function initHeroSlideshow() {
+  const slideshow = document.getElementById('heroSlideshow');
+  if (!slideshow) return;
+
+  const slides = slideshow.querySelectorAll('.hero-slide');
+  const dots = slideshow.querySelectorAll('.hero-dot');
+  let currentIndex = 0;
+  let intervalId = null;
+  const INTERVAL_MS = 5000;
+
+  function goToSlide(index) {
+    slides[currentIndex].classList.remove('active');
+    dots[currentIndex].classList.remove('active');
+
+    currentIndex = index;
+
+    slides[currentIndex].classList.add('active');
+    dots[currentIndex].classList.add('active');
+  }
+
+  function nextSlide() {
+    goToSlide((currentIndex + 1) % slides.length);
+  }
+
+  function startAutoPlay() {
+    if (intervalId) clearInterval(intervalId);
+    intervalId = setInterval(nextSlide, INTERVAL_MS);
+  }
+
+  function stopAutoPlay() {
+    if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+  }
+
+  // Click on dots to navigate
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const slideIndex = parseInt(dot.dataset.slide, 10);
+      if (slideIndex !== currentIndex) {
+        goToSlide(slideIndex);
+        // Restart timer on manual navigation
+        startAutoPlay();
+      }
+    });
+  });
+
+  // Pause on hover, resume on leave
+  slideshow.addEventListener('mouseenter', stopAutoPlay);
+  slideshow.addEventListener('mouseleave', startAutoPlay);
+
+  // Start auto-play
+  startAutoPlay();
 }

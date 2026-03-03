@@ -5,7 +5,7 @@ import { submitToSheet } from '../sheets.js';
 import { notifyAdmin } from '../whatsapp.js';
 
 export function renderContact(container) {
-    container.innerHTML = `
+  container.innerHTML = `
     <div class="page-wrapper no-pad">
       <div class="page-header">
         <div class="container">
@@ -24,7 +24,7 @@ export function renderContact(container) {
                 <div class="info-icon">📞</div>
                 <div>
                   <h4>Phone</h4>
-                  <p>+91 98765 43210</p>
+                  <p>+91 90807 44687</p>
                   <p style="font-size:0.82rem;color:var(--text-lighter);">Mon – Sat, 9 AM – 7 PM</p>
                 </div>
               </div>
@@ -32,7 +32,7 @@ export function renderContact(container) {
                 <div class="info-icon" style="background:var(--gold-light);">✉️</div>
                 <div>
                   <h4>Email</h4>
-                  <p>info@indiapropertymarkets.com</p>
+                  <p>indianpropertymarkets@gmail.com</p>
                   <p style="font-size:0.82rem;color:var(--text-lighter);">We respond within 24 hours</p>
                 </div>
               </div>
@@ -40,8 +40,8 @@ export function renderContact(container) {
                 <div class="info-icon" style="background:rgba(52,152,219,0.12);">📍</div>
                 <div>
                   <h4>Office Address</h4>
-                  <p>123 Property Hub, Andheri West</p>
-                  <p style="font-size:0.82rem;color:var(--text-lighter);">Mumbai, Maharashtra 400058</p>
+                  <p>Lakshmi Nagar, GT Nagar</p>
+                  <p style="font-size:0.82rem;color:var(--text-lighter);">Virudhunagar, Tamil Nadu - 626001</p>
                 </div>
               </div>
               <div class="contact-info-card" style="border-color:#25D366;background:rgba(37,211,102,0.04);">
@@ -49,7 +49,7 @@ export function renderContact(container) {
                 <div>
                   <h4>WhatsApp</h4>
                   <p>Chat with us instantly</p>
-                  <a href="https://wa.me/919876543210" target="_blank" class="btn btn-whatsapp btn-sm" style="margin-top:8px;">
+                  <a href="https://wa.me/919080744687" target="_blank" class="btn btn-whatsapp btn-sm" style="margin-top:8px;">
                     Chat Now →
                   </a>
                 </div>
@@ -99,31 +99,31 @@ export function renderContact(container) {
     </div>
   `;
 
-    // ---- Form Submission ----
-    const form = document.getElementById('contactForm');
-    const successDiv = document.getElementById('contactSuccess');
-    const submitBtn = document.getElementById('contactSubmitBtn');
+  // ---- Form Submission ----
+  const form = document.getElementById('contactForm');
+  const successDiv = document.getElementById('contactSuccess');
+  const submitBtn = document.getElementById('contactSubmitBtn');
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
 
-        const fd = new FormData(form);
-        const values = [
-            fd.get('fullName'),
-            fd.get('phone'),
-            fd.get('email') || '',
-            fd.get('subject') || '',
-            fd.get('message'),
-        ];
+    const fd = new FormData(form);
+    const values = [
+      fd.get('fullName'),
+      fd.get('phone'),
+      fd.get('email') || '',
+      fd.get('subject') || '',
+      fd.get('message'),
+    ];
 
-        await submitToSheet('Contacts', values);
+    await submitToSheet('Contacts', values);
 
-        const msg = `📨 *New Contact Message*%0A%0A👤 ${fd.get('fullName')}%0A📞 ${fd.get('phone')}%0A📝 ${fd.get('message')}`;
-        notifyAdmin(decodeURIComponent(msg));
+    const msg = `📨 *New Contact Message*%0A%0A👤 ${fd.get('fullName')}%0A📞 ${fd.get('phone')}%0A📝 ${fd.get('message')}`;
+    notifyAdmin(decodeURIComponent(msg));
 
-        form.style.display = 'none';
-        successDiv.classList.add('show');
-    });
+    form.style.display = 'none';
+    successDiv.classList.add('show');
+  });
 }
