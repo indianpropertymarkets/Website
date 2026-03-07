@@ -197,13 +197,21 @@ function initHeroSlideshow() {
   const INTERVAL_MS = 5000;
 
   function goToSlide(index) {
+    // Remove active from current
     slides[currentIndex].classList.remove('active');
     dots[currentIndex].classList.remove('active');
 
     currentIndex = index;
 
+    // Add active to new
     slides[currentIndex].classList.add('active');
-    dots[currentIndex].classList.add('active');
+
+    // Force CSS animation restart on the dot
+    const activeDot = dots[currentIndex];
+    activeDot.classList.remove('active');
+    // Trigger reflow to restart animation
+    void activeDot.offsetWidth;
+    activeDot.classList.add('active');
   }
 
   function nextSlide() {
@@ -222,22 +230,21 @@ function initHeroSlideshow() {
     }
   }
 
-  // Click on dots to navigate
   dots.forEach((dot) => {
     dot.addEventListener('click', () => {
       const slideIndex = parseInt(dot.dataset.slide, 10);
       if (slideIndex !== currentIndex) {
         goToSlide(slideIndex);
-        // Restart timer on manual navigation
         startAutoPlay();
       }
     });
   });
 
-  // Pause on hover, resume on leave
   slideshow.addEventListener('mouseenter', stopAutoPlay);
   slideshow.addEventListener('mouseleave', startAutoPlay);
 
-  // Start auto-play
+  // Initialize first dot animation
+  void dots[0].offsetWidth;
+
   startAutoPlay();
 }
